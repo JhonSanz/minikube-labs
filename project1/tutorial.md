@@ -26,6 +26,3 @@ ahora que todo está arriba lo que hay que hacer es
 ---
 
 Para detener el cluster corremos `minikube stop` y luego `minikube delete`
-
-
-minikube start --driver=virtualbox
