@@ -5,6 +5,7 @@ metadata:
   annotations:
     kubernetes.io/change-cause: "Updated image to nginx:latest"
 spec:
+  revisionHistoryLimit: 5
   replicas: 1
   selector:
     matchLabels:

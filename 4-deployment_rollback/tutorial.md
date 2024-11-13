@@ -33,4 +33,5 @@ Aqui podemos observar varias cosas:
 1. La versión actual del deployment es la última que aparece en la lista
 2. a medida que vamos haciendo cambios estos quedan registrados y podremos volver a una revisión en específico con la bandera **--to-revision** asi: `kubectl rollout undo deployment/nginx-deployment --to-revision=3`
 
+también podemos agregar `spec: revisionHistoryLimit: 5` para limitar el tamaño del historial
 finalmente ejecutamos `kubectl rollout status deployment/nginx-deployment` para ver detalles del rollback
