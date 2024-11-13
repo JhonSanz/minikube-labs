@@ -1,4 +1,4 @@
-Para iniciar nuestro cluster corremos `minikube start --driver=docker` y esto creará un contenedor de docker. Hay mas configuraciones, por ejuemplo es posible utilizar el driver virtualbox `minikube start --driver=virtualbox --no-vtx-check`
+Para iniciar nuestro cluster corremos `minikube start --driver=docker` y esto creará un contenedor de docker. Hay mas configuraciones, por ejemplo es posible utilizar el driver virtualbox `minikube start --driver=virtualbox --no-vtx-check`
 
 probemos que todo funcione con `kubectl get po -A`
 
