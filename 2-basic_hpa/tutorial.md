@@ -51,7 +51,7 @@ Lo que estás viendo es el comportamiento esperado de un Horizontal Pod Autoscal
 ### Monitorización del HPA:
 
 - El HPA está configurado para monitorear la utilización de la CPU y ajustar el número de réplicas de Pods según la carga.
--El HPA comienza con una sola réplica (un Pod).
+- El HPA comienza con una sola réplica (un Pod).
 
 ### Incremento de la carga de CPU:
 
