@@ -1,5 +1,5 @@
 
-#### Parte 1
+## Parte 1
 
 Debido al uso de kind tenemos que considerar que **kind corre los contenedores en docker** y eso es determinante en terminos de red. Conceptualmente hablando un Ingress se ocupa de recibir el tráfico desde fuera de kubernetes hacia dentro del cluster, y si el cluster está en una red de docker dentro de nuestro host, de alguna manera tenemos que habilitar el portMapping (algo similar a lo que ocurre con docker compose)
 
@@ -21,7 +21,9 @@ nodes:
 
 Aqui podemos ver que estamos recibiendo tráfico desde "fuera" es decir, **desde nuestro host**.
 
-#### Parte 2
+Entonces ejecutamos el comando `kind create cluster --config kind.config` para crear nuestro cluster con esa configuración
+
+## Parte 2
 
 La segunda cosa importante es que kind no tiene el ingress controller instalado por defecto, así que hay que instalarlo. Importante referirse a la [documentación oficial](https://kind.sigs.k8s.io/docs/user/ingress/#ingress-nginx)
 
@@ -46,7 +48,7 @@ Finalmente podemos aplicar nuestros bellos archivos de configuración en este or
 3. kubectl apply -f ingress.yml
 
 
-#### Parte 3
+## Parte 3
 
 Tenemos en nuestro `ingress.yml` la linea 
 
