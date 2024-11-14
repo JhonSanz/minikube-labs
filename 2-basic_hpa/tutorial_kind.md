@@ -8,6 +8,16 @@ como ya tenía servicios creados del ejercicio project1 debo borrar esas cosas q
 
 1. Crear nuestros recursos deployment.yaml, service.yaml y hpa.yaml
 2. HPA necesita del metrics-server entonces correr `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`, con `kubectl get pods -n kube-system` podemos verificar que existe un pod para el metrics-server en estado running
+
+> Es posible que el metrics server no pase a estado READY al hacer `kubectl get pods -n kube-system`, entonces para diagnosticar el problema
+
+- vemos los logs del pod con `kubectl logs metrics-server-587b667b55-jnclx -n kube-system`
+- Normlamnete se debe a problemas con la ejecución en entornos locales donde no hay TSL seguro entonces 
+- editamos la configuración por defecto con `kubectl edit deployment metrics-server -n kube-system`
+- y agregamos `spec: containers: args: - --kubelet-insecure-tls`
+- Guardamos y kubernetes realizará la actualización, verificamos con `kubectl get pods -n kube-system` hasta que esté todo ok
+
+
 3. Ahora vamos a observar como el HPA de alguna manera sobreescribe la configuración `replicas: 1` de deployment.yaml y crea replicas basado en el uso de CPU de nuestros pods. así que
    1. Corremnos `kubectl exec -it $(kubectl get pods -l app=my-app -o jsonpath='{.items[0].metadata.name}') -- /bin/bash` para entrar a nuestros pods
    2. Instalamos el paquete stress para simular consumo de CPU `apt-get update && apt-get install -y stress`
