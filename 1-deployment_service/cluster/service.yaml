@@ -10,5 +10,5 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30008  # Puerto dentro del nodo
+      nodePort: 30008
   type: NodePort
