@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-a-to-b-c
+spec:
+  podSelector:
+    matchLabels:
+      app: a
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: b
+        - podSelector:
+            matchLabels:
+              app: c
+        - podSelector:
+            matchLabels:
+              app: curlpod
+      ports:
+        - protocol: TCP
+          port: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: block-b-to-c
+spec:
+  podSelector:
+    matchLabels:
+      app: b
+  ingress:
+    - from: [] # Prohíbe todas las conexiones
+      ports:
+        - protocol: TCP
+          port: 80
