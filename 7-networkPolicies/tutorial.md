@@ -8,19 +8,16 @@ se puede demorar subiendo calico
 kubectl get pods -n kube-system
 kubectl get networkpolicy
 
-
+```bash
 kubectl apply -f deployment.yml
 kubectl apply -f service.yml
 kubectl apply -f ingress.yml
 kubectl apply -f networkPolicy.yml
+```
 
 
-pod temporal
+## Pod temporal y Pruebas de conectividad
 
-kubectl run curlpod --image=curlimages/curl -i --tty --rm
+- `kubectl run curlpod --image=curlimages/curl --restart=Never --labels="app=curlpod" -i --tty --rm --command -- curl http://service-a:80`
 
-pruebas de conectividad
-
-curl service-a.default.svc.cluster.local
-curl service-b.default.svc.cluster.local
-curl service-c.default.svc.cluster.local
+- `kubectl exec -it app-b-69b87796c8-8trzd -- curl http://service-a:80`
