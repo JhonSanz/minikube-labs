@@ -2,9 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: tutorial-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: example.local
+    - host: mycluster.example.com
       http:
         paths:
           - path: /a
@@ -19,12 +21,5 @@ spec:
             backend:
               service:
                 name: service-b
-                port:
-                  number: 80
-          - path: /c
-            pathType: Prefix
-            backend:
-              service:
-                name: service-c
                 port:
                   number: 80

@@ -39,25 +39,3 @@ spec:
           image: nginx
           ports:
             - containerPort: 80
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: app-c
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: c
-  template:
-    metadata:
-      labels:
-        app: c
-    spec:
-      containers:
-        - name: app-c
-          image: nginx
-          ports:
-            - containerPort: 80
