@@ -46,9 +46,16 @@ kubectl apply -f networkPolicy.yml
 
 ## Pruebas de conectividad
 
+#### Desde la linea de comandos
+
 El comportamiento esperado es que nos podamos comunicar desde el servicio A a B, pero no desde el servicio B a A. Verifiquemos esto con los siguientes comandos:
 
-1. `kubectl exec -it app-a-b4894b674-fz6f9 -- curl http://192.168.239.201:80`
-2. `kubectl exec -it app-b-69b87796c8-wqcsp -- curl http://192.168.239.200:80`
+2. `kubectl exec -it app-a-b4894b674-fz6f9 -- curl http://192.168.239.201:80`
+3. `kubectl exec -it app-b-69b87796c8-wqcsp -- curl http://192.168.239.200:80`
 
 Deberíamos tener respuesta en 1. pero no en 2. donde deberíamos ver un timeout
+
+
+#### Desde el navegador
+
+Esta prueba es mas simple. Si accedemos a `http://mycluster.example.com/a` tendremos respuesta ya que el service-a está expuesto, mientras `http://mycluster.example.com/b` está aislado y veremos un timeout

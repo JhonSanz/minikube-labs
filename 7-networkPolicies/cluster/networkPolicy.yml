@@ -1,32 +1,21 @@
-# Permitir tráfico desde A hacia B
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-a-to-b
-spec:
-  podSelector:
-    matchLabels:
-      app: b  # Aplica a los Pods con la etiqueta "app: b"
-  ingress:
-    - from:
-        - podSelector:
-            matchLabels:
-              app: a  # Permite conexiones desde Pods con la etiqueta "app: a"
-      ports:
-        - protocol: TCP
-          port: 80  # Limita el tráfico al puerto 80
-
----
-
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: block-b-to-a
+  name: allow-a-to-b-and-block-b-to-all
   namespace: default
 spec:
   podSelector:
     matchLabels:
-      app: b
+      app: b  # Aplica a los pods etiquetados con "app: b"
   policyTypes:
+    - Ingress
     - Egress
-  egress: []  # Esta configuración bloquea todo el tráfico de salida.
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: a  # Permite tráfico desde pods con "app: a"
+      ports:
+        - protocol: TCP
+          port: 80  # Solo permite tráfico en el puerto 80
+  egress: []  # Bloquea todo el tráfico de salida
